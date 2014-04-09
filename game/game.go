@@ -50,6 +50,11 @@ func New() *Game {
 
 func (g *Game) Update() {
 	for _, player := range g.Players {
+		for i := len(player.Points) - 1; i > 0; i-- {
+			player.Points[i].X = player.Points[i-1].X
+			player.Points[i].Y = player.Points[i-1].Y
+		}
+
 		switch player.Direction {
 		case Left:
 			player.Points[0].X -= 1
@@ -60,10 +65,18 @@ func (g *Game) Update() {
 		case Down:
 			player.Points[0].Y += 1
 		}
-		if player.Points[0].X > 15 { player.Points[0].X = 0 }
-		if player.Points[0].X < 0 { player.Points[0].X = 15 }
-		if player.Points[0].Y > 15 { player.Points[0].Y = 0 }
-		if player.Points[0].Y < 0 { player.Points[0].Y = 15 }
+		if player.Points[0].X > 31 {
+			player.Points[0].X = 0
+		}
+		if player.Points[0].X < 0 {
+			player.Points[0].X = 31
+		}
+		if player.Points[0].Y > 31 {
+			player.Points[0].Y = 0
+		}
+		if player.Points[0].Y < 0 {
+			player.Points[0].Y = 31
+		}
 	}
 }
 
@@ -91,7 +104,7 @@ func (g *Game) Run() {
 
 func (g *Game) AddPlayer(ws *websocket.Conn) {
 	g.Players[ws] = &Player{
-		Points: []Point{{rnd.Intn(16), rnd.Intn(16)}},
+		Points:    []Point{{5, 5}, {6, 5}, {7, 5}, {8, 5}, {9, 5}, {10, 5}, {11, 5}},
 		Direction: Left,
 	}
 }

@@ -11,7 +11,7 @@
 	};
 
 	var connect = function() {
-		var socket = new WebSocket("ws://localhost:3000/connect");
+		var socket = new WebSocket("ws://192.168.2.120:3000/connect");
 
 		socket.onopen = function(event) {
 			if (id == "") {
@@ -78,7 +78,7 @@
 	var draw = function() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	
-		drawPlayer(state.You, "#161");
+		drawPlayer(state.You, "#1e1");
 		if (state.Others) {
 			for (var i = state.Others.length - 1; i >= 0; i--) {
 				drawPlayer(state.Others[i]);
