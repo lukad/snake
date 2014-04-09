@@ -11,7 +11,9 @@
 	};
 
 	var connect = function() {
-		var socket = new WebSocket("ws://192.168.2.120:3000/connect");
+		var wsAddress = "ws://" + window.location.hostname + ":" + window.location.port + "/connect";
+		console.log("connecting to:", wsAddress);
+		var socket = new WebSocket(wsAddress);
 
 		socket.onopen = function(event) {
 			if (id == "") {
